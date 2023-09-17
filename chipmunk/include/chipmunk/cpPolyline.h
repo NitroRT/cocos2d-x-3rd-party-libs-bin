@@ -23,7 +23,7 @@ CP_EXPORT cpPolyline *cpPolylineSimplifyCurves(cpPolyline *line, cpFloat tol);
 
 /**
 	Returns a copy of a polyline simplified by discarding "flat" vertexes.
-	This works well on straigt edged or angular shapes, not as well on smooth shapes.
+	This works well on straight edged or angular shapes, not as well on smooth shapes.
 */
 CP_EXPORT cpPolyline *cpPolylineSimplifyVertexes(cpPolyline *line, cpFloat tol);
 
@@ -49,8 +49,8 @@ CP_EXPORT cpPolylineSet *cpPolylineSetNew(void);
 /// Destroy a polyline set.
 CP_EXPORT void cpPolylineSetDestroy(cpPolylineSet *set, cpBool freePolylines);
 
-CP_EXPORT /// Destroy and free a polyline set.
-void cpPolylineSetFree(cpPolylineSet *set, cpBool freePolylines);
+/// Destroy and free a polyline set.
+CP_EXPORT void cpPolylineSetFree(cpPolylineSet *set, cpBool freePolylines);
 
 /**
 	Add a line segment to a polyline set.
