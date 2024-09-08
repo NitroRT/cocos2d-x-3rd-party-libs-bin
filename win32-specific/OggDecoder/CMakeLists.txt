@@ -14,21 +14,21 @@ set_target_properties(${target_name} PROPERTIES
 )
 
 set_target_properties(${target_name} PROPERTIES
-  IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/prebuilt/libogg.dll"
-  IMPORTED_IMPLIB "${CMAKE_CURRENT_SOURCE_DIR}/prebuilt/libogg.lib"
+  IMPORTED_LOCATION "${platform_spec_path}/libogg.dll"
+  IMPORTED_IMPLIB "${platform_spec_path}/libogg.lib"
 )
 
 # internal link depend
  set_property(TARGET ${target_name} APPEND PROPERTY 
- INTERFACE_LINK_LIBRARIES "${CMAKE_CURRENT_SOURCE_DIR}/prebuilt/libvorbis.lib"
+ INTERFACE_LINK_LIBRARIES "${platform_spec_path}/libvorbis.lib"
 )
 set_property(TARGET ${target_name} APPEND PROPERTY 
-  IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/prebuilt/libvorbis.dll"
+  IMPORTED_LOCATION "${platform_spec_path}/libvorbis.dll"
 )
 set_property(TARGET ${target_name} APPEND PROPERTY 
- INTERFACE_LINK_LIBRARIES "${CMAKE_CURRENT_SOURCE_DIR}/prebuilt/libvorbisfile.lib"
+ INTERFACE_LINK_LIBRARIES "${platform_spec_path}/libvorbisfile.lib"
 )
 set_property(TARGET ${target_name} APPEND PROPERTY 
-  IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/prebuilt/libvorbisfile.dll"
+  IMPORTED_LOCATION "${platform_spec_path}/libvorbisfile.dll"
 )
 
