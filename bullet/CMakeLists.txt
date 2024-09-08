@@ -32,11 +32,11 @@ if(WINDOWS)
     IMPORTED_LOCATION "${platform_spec_path}/BulletDynamics.lib"
   )
   add_library(bulletinversedynamics STATIC IMPORTED)
-  set_target_properties(bulletmultithreaded PROPERTIES
+  set_target_properties(bulletinversedynamics PROPERTIES
     IMPORTED_LOCATION "${platform_spec_path}/BulletInverseDynamics.lib"
   )
   add_library(bulletsoftbody STATIC IMPORTED)
-  set_target_properties(minicl PROPERTIES
+  set_target_properties(bulletsoftbody PROPERTIES
     IMPORTED_LOCATION "${platform_spec_path}/BulletSoftBody.lib"
   )
   add_library(linearmath STATIC IMPORTED)
