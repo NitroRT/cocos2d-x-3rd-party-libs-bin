@@ -17,10 +17,33 @@ set_property(TARGET ${target_name} APPEND PROPERTY
 )
 
 if(WINDOWS)
-  set_target_properties(${target_name} PROPERTIES
-    IMPORTED_LOCATION_DEBUG "${platform_spec_path}/debug/lib${lib_name}.lib"
-    IMPORTED_LOCATION_RELEASE "${platform_spec_path}/release/lib${lib_name}.lib"
+  #set_target_properties(${target_name} PROPERTIES
+  #  #IMPORTED_LOCATION_DEBUG "${platform_spec_path}/debug/lib${lib_name}.lib"
+  #  #IMPORTED_LOCATION_RELEASE "${platform_spec_path}/release/lib${lib_name}.lib"
+  #)
+
+  # multi libs
+  add_library(bulletcollision STATIC IMPORTED)
+  set_target_properties(bulletcollision PROPERTIES
+    IMPORTED_LOCATION "${platform_spec_path}/BulletCollision.lib"
   )
+  add_library(bulletdynamics STATIC IMPORTED)
+  set_target_properties(bulletdynamics PROPERTIES
+    IMPORTED_LOCATION "${platform_spec_path}/BulletDynamics.lib"
+  )
+  add_library(bulletinversedynamics STATIC IMPORTED)
+  set_target_properties(bulletmultithreaded PROPERTIES
+    IMPORTED_LOCATION "${platform_spec_path}/BulletInverseDynamics.lib"
+  )
+  add_library(bulletsoftbody STATIC IMPORTED)
+  set_target_properties(minicl PROPERTIES
+    IMPORTED_LOCATION "${platform_spec_path}/BulletSoftBody.lib"
+  )
+  add_library(linearmath STATIC IMPORTED)
+  set_target_properties(linearmath PROPERTIES
+    IMPORTED_LOCATION "${platform_spec_path}/LinearMath.lib"
+  )
+  
   set_target_properties(${target_name} PROPERTIES
     MAP_IMPORTED_CONFIG_MINSIZEREL Release
     MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
