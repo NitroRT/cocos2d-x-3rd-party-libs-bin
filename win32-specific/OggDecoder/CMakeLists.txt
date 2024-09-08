@@ -14,21 +14,21 @@ set_target_properties(${target_name} PROPERTIES
 )
 
 set_target_properties(${target_name} PROPERTIES
-  IMPORTED_LOCATION "${platform_spec_path}/libogg.dll"
-  IMPORTED_IMPLIB "${platform_spec_path}/libogg.lib"
+  IMPORTED_LOCATION "${platform_spec_path}/ogg.dll"
+  IMPORTED_IMPLIB "${platform_spec_path}/ogg.lib"
 )
 
 # internal link depend
  set_property(TARGET ${target_name} APPEND PROPERTY 
- INTERFACE_LINK_LIBRARIES "${platform_spec_path}/libvorbis.lib"
+ INTERFACE_LINK_LIBRARIES "${platform_spec_path}/vorbis.lib"
 )
 set_property(TARGET ${target_name} APPEND PROPERTY 
-  IMPORTED_LOCATION "${platform_spec_path}/libvorbis.dll"
+  IMPORTED_LOCATION "${platform_spec_path}/vorbis.dll"
 )
 set_property(TARGET ${target_name} APPEND PROPERTY 
- INTERFACE_LINK_LIBRARIES "${platform_spec_path}/libvorbisfile.lib"
+ INTERFACE_LINK_LIBRARIES "${platform_spec_path}/vorbisfile.lib"
 )
 set_property(TARGET ${target_name} APPEND PROPERTY 
-  IMPORTED_LOCATION "${platform_spec_path}/libvorbisfile.dll"
+  IMPORTED_LOCATION "${platform_spec_path}/vorbisfile.dll"
 )
 
