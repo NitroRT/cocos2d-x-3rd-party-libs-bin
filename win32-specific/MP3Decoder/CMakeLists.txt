@@ -14,6 +14,6 @@ set_target_properties(${target_name} PROPERTIES
 )
 
 set_target_properties(${target_name} PROPERTIES
-  IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/prebuilt/libmpg123.dll"
-  IMPORTED_IMPLIB "${CMAKE_CURRENT_SOURCE_DIR}/prebuilt/libmpg123.lib"
+  IMPORTED_LOCATION "${platform_spec_path}/libmpg123.dll"
+  IMPORTED_IMPLIB "${platform_spec_path}/libmpg123.lib"
 )
