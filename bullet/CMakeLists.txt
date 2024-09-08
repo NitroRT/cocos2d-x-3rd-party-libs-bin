@@ -23,6 +23,10 @@ if(WINDOWS)
   #)
 
   # multi libs
+  set_target_properties(${target_name} PROPERTIES
+  IMPORTED_LOCATION "${platform_spec_path}/LinearMath.lib"
+  )
+
   add_library(bulletcollision STATIC IMPORTED)
   set_target_properties(bulletcollision PROPERTIES
     IMPORTED_LOCATION "${platform_spec_path}/BulletCollision.lib"
