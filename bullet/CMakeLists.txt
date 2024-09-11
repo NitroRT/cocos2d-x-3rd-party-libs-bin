@@ -40,14 +40,14 @@ else()
   set_target_properties(bulletdynamics PROPERTIES
     IMPORTED_LOCATION "${platform_spec_path}/libBulletDynamics.a"
   )
-  add_library(bulletmultithreaded STATIC IMPORTED)
-  set_target_properties(bulletmultithreaded PROPERTIES
-    IMPORTED_LOCATION "${platform_spec_path}/libBulletMultiThreaded.a"
-  )
-  add_library(minicl STATIC IMPORTED)
-  set_target_properties(minicl PROPERTIES
-    IMPORTED_LOCATION "${platform_spec_path}/libMiniCL.a"
-  )
+  #add_library(bulletmultithreaded STATIC IMPORTED)
+  #set_target_properties(bulletmultithreaded PROPERTIES
+  #  IMPORTED_LOCATION "${platform_spec_path}/libBulletMultiThreaded.a"
+  #)
+  #add_library(minicl STATIC IMPORTED)
+  #set_target_properties(minicl PROPERTIES
+  #  IMPORTED_LOCATION "${platform_spec_path}/libMiniCL.a"
+  #)
   add_library(linearmath STATIC IMPORTED)
   set_target_properties(linearmath PROPERTIES
     IMPORTED_LOCATION "${platform_spec_path}/libLinearMath.a"
@@ -64,12 +64,12 @@ else()
   set_property(TARGET ${target_name} APPEND PROPERTY
     INTERFACE_LINK_LIBRARIES "bulletdynamics"
   )
-  set_property(TARGET ${target_name} APPEND PROPERTY
-    INTERFACE_LINK_LIBRARIES "bulletmultithreaded"
-  )
-  set_property(TARGET ${target_name} APPEND PROPERTY
-    INTERFACE_LINK_LIBRARIES "minicl"
-  )
+  #set_property(TARGET ${target_name} APPEND PROPERTY
+  #  INTERFACE_LINK_LIBRARIES "bulletmultithreaded"
+  #)
+  #set_property(TARGET ${target_name} APPEND PROPERTY
+  #  INTERFACE_LINK_LIBRARIES "minicl"
+  #)
 endif()
 
 
