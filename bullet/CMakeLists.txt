@@ -48,10 +48,10 @@ else()
   #set_target_properties(minicl PROPERTIES
   #  IMPORTED_LOCATION "${platform_spec_path}/libMiniCL.a"
   #)
-  #add_library(linearmath STATIC IMPORTED)
-  #set_target_properties(linearmath PROPERTIES
-  #  IMPORTED_LOCATION "${platform_spec_path}/libLinearMath.a"
-  #)
+  add_library(linearmath STATIC IMPORTED)
+  set_target_properties(linearmath PROPERTIES
+    IMPORTED_LOCATION "${platform_spec_path}/libLinearMath.a"
+  )
 
   # internal link depend
   set_property(TARGET bulletcollision APPEND PROPERTY INTERFACE_LINK_LIBRARIES "linearmath")
