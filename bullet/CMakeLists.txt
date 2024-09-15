@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.19)
 
 set(lib_name bullet)
 set(target_name ext_${lib_name})
@@ -56,6 +56,21 @@ if(WINDOWS)
   set_target_properties(${target_name} PROPERTIES
     MAP_IMPORTED_CONFIG_MINSIZEREL Release
     MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
+  )
+
+  set_target_properties(linearmath PROPERTIES
+  MAP_IMPORTED_CONFIG_MINSIZEREL Release
+  MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
+)
+
+  set_target_properties( bulletcollision PROPERTIES
+  MAP_IMPORTED_CONFIG_MINSIZEREL Release
+  MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
+  )
+
+  set_target_properties( bulletdynamics PROPERTIES
+  MAP_IMPORTED_CONFIG_MINSIZEREL Release
+  MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
   )
 else()
   set_target_properties(${target_name} PROPERTIES
