@@ -24,7 +24,7 @@
 #include "ioapi.h"
 
 #if defined(_WIN32)
-#  define snprintf _snprintf
+#  define snprintf _snprintf_s
 #endif
 
 voidpf call_zopen64(const zlib_filefunc64_32_def *pfilefunc, const void *filename, int mode)
@@ -104,8 +104,9 @@ static voidpf file_build_ioposix(FILE *file, const char *filename)
     ioposix = (FILE_IOPOSIX*)malloc(sizeof(FILE_IOPOSIX));
     ioposix->file = file;
     ioposix->filenameLength = (int)strlen(filename) + 1;
-    ioposix->filename = (char*)malloc(ioposix->filenameLength * sizeof(char));
-    strncpy((char*)ioposix->filename, filename, ioposix->filenameLength);
+    size_t fileNameSize = ioposix->filenameLength * sizeof( char );
+    ioposix->filename = (char*)malloc( fileNameSize );
+    strncpy_s((char*)ioposix->filename, fileNameSize, filename, ioposix->filenameLength);
     return (voidpf)ioposix;
 }
 
@@ -122,7 +123,10 @@ static voidpf ZCALLBACK fopen_file_func(ZIP_UNUSED voidpf opaque, const char *fi
 
     if ((filename != NULL) && (mode_fopen != NULL))
     {
-        file = fopen(filename, mode_fopen);
+        errno_t err;
+        err = fopen_s( &file, filename, mode_fopen );
+        if ( err != 0 )
+            return file;
         return file_build_ioposix(file, filename);
     }
     return file;
@@ -141,8 +145,9 @@ static voidpf ZCALLBACK fopen64_file_func(ZIP_UNUSED voidpf opaque, const void *
 
     if ((filename != NULL) && (mode_fopen != NULL))
     {
-        file = fopen64((const char*)filename, mode_fopen);
-        return file_build_ioposix(file, (const char*)filename);
+        errno_t err;
+        if( (err = fopen_s( &file, (const char*)filename, mode_fopen )) == 0 )
+            return file_build_ioposix(file, (const char*)filename);
     }
     return file;
 }
@@ -157,13 +162,14 @@ static voidpf ZCALLBACK fopendisk64_file_func(voidpf opaque, voidpf stream, uint
     if (stream == NULL)
         return NULL;
     ioposix = (FILE_IOPOSIX*)stream;
-    diskFilename = (char*)malloc(ioposix->filenameLength * sizeof(char));
-    strncpy(diskFilename, (const char*)ioposix->filename, ioposix->filenameLength);
+    size_t diskFileNameSize = ioposix->filenameLength * sizeof( char );
+    diskFilename = (char*)malloc( diskFileNameSize );
+    strncpy_s(diskFilename, diskFileNameSize, (const char*)ioposix->filename, ioposix->filenameLength);
     for (i = ioposix->filenameLength - 1; i >= 0; i -= 1)
     {
         if (diskFilename[i] != '.')
             continue;
-        snprintf(&diskFilename[i], ioposix->filenameLength - i, ".z%02u", number_disk + 1);
+        snprintf( &diskFilename[i], diskFileNameSize, ioposix->filenameLength - i, ".z%02u", number_disk + 1 );
         break;
     }
     if (i >= 0)
@@ -182,13 +188,14 @@ static voidpf ZCALLBACK fopendisk_file_func(voidpf opaque, voidpf stream, uint32
     if (stream == NULL)
         return NULL;
     ioposix = (FILE_IOPOSIX*)stream;
-    diskFilename = (char*)malloc(ioposix->filenameLength * sizeof(char));
-    strncpy(diskFilename, (const char*)ioposix->filename, ioposix->filenameLength);
+    size_t diskFilenameSize = ioposix->filenameLength * sizeof( char );
+    diskFilename = (char*)malloc( diskFilenameSize );
+    strncpy_s(diskFilename, diskFilenameSize, (const char*)ioposix->filename, ioposix->filenameLength);
     for (i = ioposix->filenameLength - 1; i >= 0; i -= 1)
     {
         if (diskFilename[i] != '.')
             continue;
-        snprintf(&diskFilename[i], ioposix->filenameLength - i, ".z%02u", number_disk + 1);
+        snprintf(&diskFilename[i], diskFilenameSize, ioposix->filenameLength - i, ".z%02u", number_disk + 1);
         break;
     }
     if (i >= 0)
