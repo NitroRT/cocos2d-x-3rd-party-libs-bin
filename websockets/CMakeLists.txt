@@ -29,6 +29,10 @@ if(WINDOWS)
     IMPORTED_LOCATION "${platform_spec_path}/${lib_name}.dll"
     IMPORTED_IMPLIB "${platform_spec_path}/${lib_name}.lib"
   )
+elseif(APPLE)
+find_library( WEBSOCKETS_LIB NAMES "lib${lib_name}" PATHS ${platform_apple_spec_path} NO_CMAKE_FIND_ROOT_PATH )
+  set_target_properties(${target_name} PROPERTIES
+    IMPORTED_LOCATION ${WEBSOCKETS_LIB}
 else()
   set_target_properties(${target_name} PROPERTIES
     IMPORTED_LOCATION "${platform_spec_path}/lib${lib_name}.a"

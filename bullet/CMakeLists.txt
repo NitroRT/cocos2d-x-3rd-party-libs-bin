@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.28)
 
 set(lib_name bullet)
 set(target_name ext_${lib_name})
@@ -61,7 +61,7 @@ if(WINDOWS)
   set_target_properties(linearmath PROPERTIES
   MAP_IMPORTED_CONFIG_MINSIZEREL Release
   MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
-)
+  )
 
   set_target_properties( bulletcollision PROPERTIES
   MAP_IMPORTED_CONFIG_MINSIZEREL Release
@@ -71,6 +71,41 @@ if(WINDOWS)
   set_target_properties( bulletdynamics PROPERTIES
   MAP_IMPORTED_CONFIG_MINSIZEREL Release
   MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
+  )
+elseif(APPLE)
+  find_library( LINEARMATH_LIB NAMES libLinearMath PATHS ${platform_apple_spec_path} NO_CMAKE_FIND_ROOT_PATH )
+  set_target_properties(${target_name} PROPERTIES
+    IMPORTED_LOCATION ${LINEARMATH_LIB}
+  )
+
+  # multi libs
+  add_library(bulletcollision STATIC IMPORTED)
+  find_library( BULLETCOLLISION_LIB NAMES libBulletCollision PATHS ${platform_apple_spec_path} NO_CMAKE_FIND_ROOT_PATH )
+
+  set_target_properties(bulletcollision PROPERTIES
+    IMPORTED_LOCATION ${BULLETCOLLISION_LIB}
+  )
+  add_library(bulletdynamics STATIC IMPORTED)
+  find_library( BULLETDYNAMICS_LIB NAMES libBulletDynamics PATHS ${platform_apple_spec_path} NO_CMAKE_FIND_ROOT_PATH )
+  set_target_properties(bulletdynamics PROPERTIES
+    IMPORTED_LOCATION ${BULLETDYNAMICS_LIB}
+  )
+
+  add_library(linearmath STATIC IMPORTED)
+  set_target_properties(linearmath PROPERTIES
+    IMPORTED_LOCATION ${LINEARMATH_LIB}
+  )
+
+  # internal link depend
+  set_property(TARGET bulletcollision APPEND PROPERTY INTERFACE_LINK_LIBRARIES "linearmath")
+  set_property(TARGET bulletdynamics APPEND PROPERTY INTERFACE_LINK_LIBRARIES "bulletcollision")
+
+  # mark multi libs link into single one: "${target_name}"
+  set_property(TARGET ${target_name} APPEND PROPERTY
+    INTERFACE_LINK_LIBRARIES "bulletcollision"
+  )
+  set_property(TARGET ${target_name} APPEND PROPERTY
+    INTERFACE_LINK_LIBRARIES "bulletdynamics"
   )
 else()
   set_target_properties(${target_name} PROPERTIES

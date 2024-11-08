@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.28)
 
 set(lib_name jpeg)
 set(target_name ext_${lib_name})
@@ -15,6 +15,11 @@ set_target_properties(${target_name} PROPERTIES
 if(WINDOWS)
   set_target_properties(${target_name} PROPERTIES
     IMPORTED_LOCATION "${platform_spec_path}/lib${lib_name}.lib"
+  )
+elseif(APPLE)
+  find_library( JPEG_LIB NAMES libjpeg PATHS ${platform_apple_spec_path} NO_CMAKE_FIND_ROOT_PATH )
+  set_target_properties(${target_name} PROPERTIES
+    IMPORTED_LOCATION ${JPEG_LIB}
   )
 else()
   set_target_properties(${target_name} PROPERTIES

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.28)
 
 set(lib_name chipmunk)
 set(target_name ext_${lib_name})
@@ -20,6 +20,11 @@ if(WINDOWS)
   set_target_properties(${target_name} PROPERTIES
     MAP_IMPORTED_CONFIG_MINSIZEREL Release
     MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
+  )
+elseif(APPLE)
+  find_library( CHIPMUNK_LIB NAMES libchipmunk PATHS ${platform_apple_spec_path} NO_CMAKE_FIND_ROOT_PATH )
+  set_target_properties(${target_name} PROPERTIES
+    IMPORTED_LOCATION ${CHIPMUNK_LIB}
   )
 else()
   set_target_properties(${target_name} PROPERTIES
