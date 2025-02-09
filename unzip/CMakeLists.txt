@@ -5,6 +5,8 @@ set(target_name ext_${lib_name})
 
 project(${lib_name})
 
+find_package(BZip2 REQUIRED)
+
 set(${target_name}_src
   ioapi.cpp
   unzip.cpp
@@ -16,6 +18,7 @@ add_library(${target_name} STATIC
 )
 
 target_include_directories(${target_name} PUBLIC .)
+target_link_libraries(${target_name} PRIVATE BZip2::BZip2)
 
 if(MACOSX OR ANDROID OR WINDOWS)
   get_target_property(zlib_header ext_zlib INTERFACE_INCLUDE_DIRECTORIES)
