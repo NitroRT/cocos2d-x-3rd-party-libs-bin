@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.20)
 
 set(lib_name box2d)
 set(target_name ext_${lib_name})

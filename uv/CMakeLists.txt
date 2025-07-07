@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.28)
 
 set(lib_name uv)
 set(target_name ext_${lib_name})
