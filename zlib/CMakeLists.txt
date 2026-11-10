@@ -7,20 +7,11 @@ project(${lib_name})
 
 include(../cmake/CocosExternalConfig.cmake)
 
-if(WINDOWS)
-  add_library(${target_name} SHARED IMPORTED GLOBAL)
-else()
-  add_library(${target_name} STATIC IMPORTED GLOBAL)
-endif()
-
 if(MACOSX OR ANDROID)
-  set_target_properties(${target_name} PROPERTIES
-    INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/include"
-  )
-  set_target_properties(${target_name} PROPERTIES
-    IMPORTED_LOCATION "${platform_spec_path}/libz.a"
-  )
+  add_library(${target_name} INTERFACE)
+  target_link_libraries(${target_name} INTERFACE z)
 elseif(WINDOWS)
+  add_library(${target_name} SHARED IMPORTED GLOBAL)
   set_target_properties(${target_name} PROPERTIES
     INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/../win32-specific/zlib/include"
   )
