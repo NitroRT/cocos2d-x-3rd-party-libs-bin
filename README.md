@@ -10,5 +10,6 @@ add CMake Script for all platforms
 | tinyxml2 | `tinyxml2/` | 11.0.0 | https://github.com/leethomason/tinyxml2 |
 | xxHash | `xxhash/` | 0.8.4 | https://github.com/Cyan4973/xxHash |
 | tinydir | `tinydir/` | 1.2.6 (its package.json still reads 1.2.4) | https://github.com/cxong/tinydir |
+| Clipper | `clipper/` | 6.4.2, upstream defaults (`use_lines` on, `use_deprecated` off) | https://sourceforge.net/projects/polyclipping/ |
 
 `json/document-wrapper.h` is cocos-specific and is kept across updates.
