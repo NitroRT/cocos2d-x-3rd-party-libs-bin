@@ -11,6 +11,7 @@ add CMake Script for all platforms
 | xxHash | `xxhash/` | 0.8.4 | https://github.com/Cyan4973/xxHash |
 | tinydir | `tinydir/` | 1.2.6 (its package.json still reads 1.2.4) | https://github.com/cxong/tinydir |
 | Clipper | `clipper/` | 6.4.2, upstream defaults (`use_lines` on, `use_deprecated` off) | https://sourceforge.net/projects/polyclipping/ |
+| libpng | `png/` | 1.6.59 on Android (arm64-v8a with NEON, armeabi-v7a) and Windows (x64, Win32, static `/MD`). Apple xcframework still 1.6.41 with 1.6.16 headers, pending Mac rebuild | https://github.com/pnggroup/libpng |
 | zlib | `zlib/`, `win32-specific/zlib/include` | Windows: 1.4 built with `win32/Makefile.msc` (keeps the `zlib1.dll` name that `libcurl.dll` imports). Android, macOS, iOS: system zlib | https://github.com/madler/zlib |
 
 `json/document-wrapper.h` is cocos-specific and is kept across updates.
