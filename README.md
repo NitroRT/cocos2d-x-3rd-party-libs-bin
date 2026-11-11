@@ -10,6 +10,7 @@ add CMake Script for all platforms
 | tinyxml2 | `tinyxml2/` | 11.0.0 | https://github.com/leethomason/tinyxml2 |
 | xxHash | `xxhash/` | 0.8.4 | https://github.com/Cyan4973/xxHash |
 | tinydir | `tinydir/` | 1.2.6 (its package.json still reads 1.2.4) | https://github.com/cxong/tinydir |
+| SQLite | `sqlite3/` | 3.54.1 amalgamation (sqlite-amalgamation-3540100.zip, SHA3-256 92281c86...8e30), built from source; off by default, enable with `-DBUILD_EXT_SQLITE=ON` (target `ext_sqlite3`) | https://sqlite.org |
 | Clipper | `clipper/` | 6.4.2, upstream defaults (`use_lines` on, `use_deprecated` off) | https://sourceforge.net/projects/polyclipping/ |
 | libpng | `png/` | 1.6.59 on Android (arm64-v8a with NEON, armeabi-v7a), Windows (x64, Win32, static `/MD`), Apple xcframework (macos-arm64 15.0, ios-arm64 and ios-arm64-simulator 16.0, NEON, system zlib) | https://github.com/pnggroup/libpng |
 | FreeType | `freetype2/` | 2.15.0 on Android (arm64-v8a, armeabi-v7a), Windows (x64, Win32, static `/MD`) and Apple xcframework (macos-arm64 15.0, ios-arm64 and ios-arm64-simulator 16.0), all FT_DISABLE_* on (bundled inflate, no bzip2/png/harfbuzz/brotli/hvf) | https://github.com/freetype/freetype |

@@ -21,6 +21,7 @@ option(BUILD_EXT_MD5 "Build with internal md5 support" ON)
 option(BUILD_EXT_ZLIB "Build with internal zlib support" ON)
 option(BUILD_EXT_CURL "Build with internal curl support" ON)
 option(BUILD_EXT_UNZIP "Build with internal unzip support" ON)
+option(BUILD_EXT_SQLITE "Build with internal sqlite3 support" OFF)
 
 add_library(external empty.cpp)
 
@@ -94,6 +95,11 @@ if(BUILD_EXT_MD5)
     add_subdirectory(md5)
     target_link_libraries(external ext_md5)
 endif(BUILD_EXT_MD5)
+
+if(BUILD_EXT_SQLITE)
+    add_subdirectory(sqlite3)
+    target_link_libraries(external ext_sqlite3)
+endif(BUILD_EXT_SQLITE)
 
 if(NOT LINUX)
     if(BUILD_EXT_CURL)
