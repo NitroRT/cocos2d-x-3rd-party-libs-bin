@@ -13,7 +13,7 @@ if(MACOSX OR ANDROID)
 elseif(WINDOWS)
   add_library(${target_name} SHARED IMPORTED GLOBAL)
   set_target_properties(${target_name} PROPERTIES
-    INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/../win32-specific/zlib/include"
+    INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/include"
   )
   set_target_properties(${target_name} PROPERTIES
     IMPORTED_LOCATION "${platform_spec_path}/${lib_name}1.dll"
