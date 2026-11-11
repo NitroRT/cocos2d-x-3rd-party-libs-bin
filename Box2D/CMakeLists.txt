@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.28)
 
 set(lib_name box2d)
 set(target_name ext_${lib_name})
@@ -22,6 +22,11 @@ if(WINDOWS)
   set_target_properties(${target_name} PROPERTIES
     MAP_IMPORTED_CONFIG_MINSIZEREL Release
     MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
+  )
+elseif(APPLE)
+  find_library( BOX2D_LIB NAMES "lib${lib_name}" PATHS ${platform_apple_spec_path} NO_CMAKE_FIND_ROOT_PATH )
+  set_target_properties(${target_name} PROPERTIES
+    IMPORTED_LOCATION ${BOX2D_LIB}
   )
 else()
   set_target_properties(${target_name} PROPERTIES
