@@ -17,3 +17,7 @@ add CMake Script for all platforms
 | zlib | `zlib/` (Windows headers in `zlib/include`) | Windows: 1.4 built with `win32/Makefile.msc`, which keeps zlib's official `zlib1.dll` name. Android, macOS, iOS: system zlib | https://github.com/madler/zlib |
 
 `json/document-wrapper.h` is cocos-specific and is kept across updates.
+
+## Releasing a tag
+
+`version.json` → `prebuilt_libs_version` must equal the tag name. `download-deps.py` compares it with `"version"` in the engine's `external/config.json` to decide whether `external/` is up to date, so commit the new value first, then tag that commit.
