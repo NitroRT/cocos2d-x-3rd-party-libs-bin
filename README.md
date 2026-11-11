@@ -14,6 +14,7 @@ add CMake Script for all platforms
 | Clipper | `clipper/` | 6.4.2, upstream defaults (`use_lines` on, `use_deprecated` off) | https://sourceforge.net/projects/polyclipping/ |
 | libpng | `png/` | 1.6.59 on Android (arm64-v8a with NEON, armeabi-v7a), Windows (x64, Win32, static `/MD`), Apple xcframework (macos-arm64 15.0, ios-arm64 and ios-arm64-simulator 16.0, NEON, system zlib) | https://github.com/pnggroup/libpng |
 | FreeType | `freetype2/` | 2.15.0 on Android (arm64-v8a, armeabi-v7a), Windows (x64, Win32, static `/MD`) and Apple xcframework (macos-arm64 15.0, ios-arm64 and ios-arm64-simulator 16.0), all FT_DISABLE_* on (bundled inflate, no bzip2/png/harfbuzz/brotli/hvf) | https://github.com/freetype/freetype |
+| libjpeg-turbo | `jpeg/` | 3.2.1, libjpeg API 62 with `jpeg_mem_src`/`jpeg_mem_dest`, static, no TurboJPEG API. Android arm64-v8a/armeabi-v7a with NEON SIMD; Windows x64/Win32 without SIMD (no NASM; dev target), `/MD`. Apple: pending Mac rebuild (ios is turbo 3.0.4, mac is IJG 9f, both with IJG v9 headers) | https://github.com/libjpeg-turbo/libjpeg-turbo |
 | zlib | `zlib/` (Windows headers in `zlib/include`) | Windows: 1.4 built with `win32/Makefile.msc`, which keeps zlib's official `zlib1.dll` name. Android, macOS, iOS: system zlib | https://github.com/madler/zlib |
 
 `json/document-wrapper.h` is cocos-specific and is kept across updates.
